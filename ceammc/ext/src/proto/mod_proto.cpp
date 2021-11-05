@@ -2,6 +2,11 @@
 #include "proto_firmata.h"
 #include "proto_hui.h"
 #include "proto_sp_alpaca.h"
+#include "proto_vlc.h"
+
+#ifdef WITH_HTTP
+#include "proto_http.h"
+#endif
 
 void setup_proto_midi();
 void setup_proto_midi_casio();
@@ -20,5 +25,10 @@ void ceammc_proto_setup()
     setup_proto_midi_sysex();
     setup_proto_mpv();
     setup_proto_sp_alpaca();
+    setup_proto_vlc();
     setup_proto_xtouch_ext();
+
+#ifdef WITH_HTTP
+    setup_proto_http();
+#endif
 }

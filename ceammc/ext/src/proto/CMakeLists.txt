@@ -2,6 +2,7 @@ add_subdirectory(firmata)
 
 add_library(ceammc_proto STATIC mod_proto.cpp mpv_ipc.cpp)
 
+
 function(ceammc_proto_external name)
     target_sources(ceammc_proto PRIVATE "proto_${name}.cpp")
 endfunction()
@@ -15,6 +16,8 @@ ceammc_proto_external(midi_sysex)
 ceammc_proto_external(mpv)
 ceammc_proto_external(sp_alpaca)
 ceammc_proto_external(xtouch_ext)
+ceammc_proto_external(vlc)
+ceammc_proto_external(http)
 
 target_sources(ceammc_proto PRIVATE proto_midi_parser.cpp)
 target_include_directories(ceammc_proto
@@ -23,5 +26,6 @@ target_include_directories(ceammc_proto
     PRIVATE
         ${PROJECT_BINARY_DIR} # for config.h
         ${CMAKE_CURRENT_SOURCE_DIR}/../midi
+        "$<TARGET_PROPERTY:fmt,INCLUDE_DIRECTORIES>"
 )
 target_link_libraries(ceammc_proto PRIVATE proto_firmata)
